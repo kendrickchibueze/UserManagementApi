@@ -14,7 +14,6 @@ namespace UserManagementApi.Controllers
             public IEnumerable<string> Get()
             {
                 return new List<string> { "Ahmed", "Ali", "Ahsan" };
-            }
-        
+            } 
         }
 }

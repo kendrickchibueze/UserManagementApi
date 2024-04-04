@@ -1,16 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NETCore.MailKit.Core;
 using System.Text;
-using UserManagementApi.Interfaces;
-using UserManagementApi.Model;
 using UserManagementApi.Services;
-using UserManagementApi.Services.Models;
-//using EmailService = NETCore.MailKit.Core.EmailService;
+
 
 namespace UserManagementApi
 {
@@ -24,12 +17,6 @@ namespace UserManagementApi
             builder.Services.ConfigureIISIntegration();
             builder.Services.ConfigureSqlContext(builder.Configuration);
             builder.Services.ConfigureServices(builder.Configuration);
-
-
-
-
-
-
 
             // Adding Authentication
             builder.Services.AddAuthentication(options =>
@@ -51,18 +38,7 @@ namespace UserManagementApi
                 };
             });
 
-
-          
-
-
-
-
-
-           builder.Services.AddControllers();
-
-
-
-
+            builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -103,20 +79,11 @@ namespace UserManagementApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
-
-
-
 }

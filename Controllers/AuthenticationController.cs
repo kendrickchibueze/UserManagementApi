@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NETCore.MailKit.Core;
 using UserManagementApi.Interfaces;
 using UserManagementApi.Model;
 using UserManagementApi.Model.Authentication.Login;
@@ -12,18 +11,10 @@ namespace UserManagementApi.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IUserService _userService;
-      
-
         public AuthenticationController(IUserService userService)
         {
             _userService = userService;
-          
         }
-
-
-
-
-
         [HttpPost("Register")]
         public async Task<ActionResult<UserManagerResponse>> Register([FromBody] RegisterUser registerUser, string role)
         {
@@ -35,7 +26,6 @@ namespace UserManagementApi.Controllers
 
             return Ok(result);
         }
-
 
         [HttpGet("ConfirmEmail")]
         public async Task<ActionResult<UserManagerResponse>> ConfirmEmail(string token, string email)
@@ -50,7 +40,7 @@ namespace UserManagementApi.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<UserManagerResponse>>Login([FromBody]LoginModel loginModel)
+        public async Task<ActionResult<UserManagerResponse>> Login([FromBody] LoginModel loginModel)
         {
             var result = await _userService.Login(loginModel);
             if (!result.IsSuccess)

@@ -22,7 +22,6 @@ namespace UserManagementApi.Services
         private readonly IEmailService _emailService;
         private readonly IUrlHelper _urlHelper;
         private readonly IConfiguration _configuration;
-
         public UserServices(UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager, IConfiguration configuration, IEmailService emailService, IUrlHelper urlHelper)
@@ -34,8 +33,6 @@ namespace UserManagementApi.Services
             _urlHelper = urlHelper;
             _configuration = configuration;
         }
-
-
         public async Task<UserManagerResponse> Register(RegisterUser registerUser, string role)
         {
 
@@ -87,7 +84,6 @@ namespace UserManagementApi.Services
                     Message = $"User created & Email Sent to {user.Email} SuccessFully",
                     IsSuccess = true,
                 };
-
             }
             else
             {
@@ -97,15 +93,9 @@ namespace UserManagementApi.Services
                     Message = ErrorMsg.UserRoleNotFound,
                     IsSuccess = false
                 };
-
-
             }
-
-
         }
-
-
-        public async Task<UserManagerResponse> ConfirmEmail(string token, string email)
+       public async Task<UserManagerResponse> ConfirmEmail(string token, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
@@ -129,10 +119,6 @@ namespace UserManagementApi.Services
                 
             };
         }
-
-
-       
-
         public async Task<UserManagerResponse> Login(LoginModel loginModel)
         {
             var user = await _userManager.FindByNameAsync(loginModel.Username);
@@ -171,7 +157,6 @@ namespace UserManagementApi.Services
                     Errors = new[] { ErrorMsg.InvalidLoginAttempt }
                 };
             }
-
             var authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
@@ -192,8 +177,6 @@ namespace UserManagementApi.Services
                 ExpiredDate = jwtToken.ValidTo
             };
         }
-
-
         public async Task<UserManagerResponse> LoginWithOTP(string code, string username)
         {
             var user = await _userManager.FindByNameAsync(username);
@@ -232,9 +215,6 @@ namespace UserManagementApi.Services
                 Message = "Invalid code entered. Please try again."
             };
         }
-
-
-
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -249,6 +229,5 @@ namespace UserManagementApi.Services
 
             return token;
         }
-
     }
 }
