@@ -40,8 +40,6 @@ namespace UserManagementApi.Services
             {
                 throw new ArgumentException("RegisterUser or its Email property is null or empty.");
             }
-
-            //Check User Exist 
             var userExist = await _userManager.FindByEmailAsync(registerUser.Email);
             if (userExist != null)
             {
