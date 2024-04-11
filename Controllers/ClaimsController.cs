@@ -8,5 +8,7 @@ namespace UserManagementApi.Controllers
         {
             return View();
         }
+
+        //doing the claims setup here...
     }
 }

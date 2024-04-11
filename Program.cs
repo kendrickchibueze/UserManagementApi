@@ -9,12 +9,10 @@ namespace UserManagementApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
             builder.Services.ConfigureCors();
             builder.Services.ConfigureIISIntegration();
             builder.Services.ConfigureSqlContext(builder.Configuration);
             builder.Services.ConfigureServices(builder.Configuration);
-
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
